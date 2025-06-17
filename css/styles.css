@@ -48,26 +48,38 @@ body {
 }
 
 .snap-section {
-  /* Each section should be 100% of the scroll-container's height */
   height: 100%;
   scroll-snap-align: start;
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 2rem;
+  /* Ensure padding is calculated within the element's height */
+  box-sizing: border-box;
+}
+
+/* Make the bootstrap container a flex column that fills the section */
+.snap-section .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* Prevent the title from shrinking */
+.snap-section h2 {
+  flex-shrink: 0;
 }
 
 .tableau-placeholder {
   width: 100%;
-  height: 80vh;
-  min-height: 400px;
+  /* Let the dashboard grow to fill available space */
+  flex-grow: 1;
+  /* Set a minimum height of 0 as a flex basis, replacing the old vh unit */
+  min-height: 0;
   overflow: hidden;
 }
 
 @media (max-width: 768px) {
-  .tableau-placeholder {
-    height: 60vh;
-  }
+  /* The dashboard height is now responsive, so no specific height is needed here */
   .snap-section {
     padding: 1rem;
   }
