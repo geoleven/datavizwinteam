@@ -4,8 +4,19 @@
   --purple-dark: #4b0082;
 }
 
+/* Ensure html and body have a defined height basis */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent body from ever scrolling */
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Use flexbox to position the navbar, content, and footer */
+  display: flex;
+  flex-direction: column;
 }
 
 .bg-purple {
@@ -26,13 +37,19 @@ body {
 }
 
 .scroll-container {
-  scroll-snap-type: y mandatory;
-  height: 100vh;
+  /* Let the container grow to fill available space */
+  flex-grow: 1;
+  /* Crucially, set a height basis of 0. This allows flex-grow
+     to work correctly with overflow content. */
+  height: 0;
+  /* Re-enable this container's own scrollbar and snapping */
   overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
 .snap-section {
-  height: 100vh;
+  /* Each section should be 100% of the scroll-container's height */
+  height: 100%;
   scroll-snap-align: start;
   display: flex;
   align-items: center;
