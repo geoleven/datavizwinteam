@@ -1,0 +1,57 @@
+:root {
+  --purple: #6a0dad;
+  --purple-light: #b19cd9;
+  --purple-dark: #4b0082;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bg-purple {
+  background-color: var(--purple);
+}
+
+.bg-purple-light {
+  background-color: var(--purple-light);
+}
+
+.bg-purple-dark {
+  background-color: var(--purple-dark);
+  color: white;
+}
+
+.navbar-brand, .nav-link {
+  color: white !important;
+}
+
+.scroll-container {
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.snap-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.tableau-placeholder {
+  width: 100%;
+  height: 80vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .tableau-placeholder {
+    height: 60vh;
+  }
+  .snap-section {
+    padding: 1rem;
+  }
+}

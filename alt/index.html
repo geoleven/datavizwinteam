@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Purple Analytics Scrollytelling</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6a0dad;
+      --secondary: #9370db;
+      --light: #e6e6fa;
+      --white: #ffffff;
+      --dark: #4b0082;
+      --accent: #c9a0dc;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: transparent !important;
+      position: relative;
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: rgba(106, 13, 173, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white !important;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,0.9) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+    }
+
+    .nav-link:hover {
+      color: white !important;
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .section {
+      margin-top: 3vw;
+      margin-bottom: 3vw;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 8px 64px 0 rgba(106,13,173,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.08);
+      border-radius: 2.5rem;
+      backdrop-filter: blur(18px);
+      padding: 3rem 2rem;
+      max-width: 1800px;
+      width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      animation: fadeInUp 1.2s cubic-bezier(.4,2,.6,1);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(60px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 16px 96px 0 rgba(106,13,173,0.35), 0 1.5px 8px 0 rgba(0,0,0,0.12);
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #fff;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 2px 16px rgba(106,13,173,0.25);
+    }
+
+    .responsive-embed {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(106,13,173,0.18);
+      background: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .responsive-embed iframe, .responsive-embed object {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      border-radius: 2rem;
+    }
+
+    .container {
+      max-width: 1600px;
+      width: 90vw;
+      padding: 0 2vw;
+    }
+
+    .dashboard-card, .youtube-container {
+      width: 96vw;
+      max-width: 1800px;
+      margin: 3rem auto;
+    }
+
+    .dashboard-card {
+      background: rgba(255,255,255,0.85);
+      border-radius: 40px;
+      box-shadow: 0 30px 80px 0 rgba(106,13,173,0.15), 0 1.5px 8px 0 rgba(0,0,0,0.04);
+      backdrop-filter: blur(8px);
+      transition: all 0.4s cubic-bezier(.4,2,.6,1);
+      overflow: hidden;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dashboard-card iframe {
+      border-radius: 30px;
+      height: 1000px !important;
+      min-width: 100%;
+      min-height: 60vh;
+      box-shadow: 0 8px 32px rgba(106,13,173,0.10);
+    }
+
+    .youtube-container {
+      position: relative;
+      padding-bottom: 40%;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px 0 rgba(106,13,173,0.15), 0 1.5px 8px 0 rgba(0,0,0,0.04);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .youtube-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 40px;
+    }
+
+    .citation-card {
+      color: #2d174d;
+      background: rgba(255,255,255,0.85);
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px rgba(106,13,173,0.10);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .citation-card h3, .citation-card .section-title {
+      color: #6a0dad;
+      font-weight: 700;
+    }
+
+    .citation-card ul, .citation-card li {
+      color: #2d174d;
+    }
+
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(106,13,173,0.9) 0%, rgba(75,0,130,0.9) 100%);
+      z-index: 1;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .scroll-indicator:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .col-lg-10 {
+      padding: 0 2vw;
+    }
+
+    @media (max-width: 1200px) {
+      .dashboard-card iframe {
+        height: 600px !important;
+      }
+      .youtube-container {
+        padding-bottom: 56.25%;
+      }
+    }
+    @media (max-width: 768px) {
+      .dashboard-card, .youtube-container {
+        width: 98vw;
+        max-width: 100vw;
+      }
+      .dashboard-card iframe {
+        height: 350px !important;
+      }
+      .youtube-container {
+        padding-bottom: 56.25%;
+      }
+    }
+    @media (max-width: 900px) {
+      .responsive-embed {
+        aspect-ratio: 4/5;
+        min-height: 350px;
+        max-height: 80vh;
+        overflow: auto;
+      }
+      .glass-card { padding: 0.5rem 0.2rem; }
+      .section-title { font-size: 1.3rem; }
+      .section {
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+    }
+    @media (max-width: 600px) {
+      .responsive-embed {
+        aspect-ratio: 1/1.2;
+        min-height: 250px;
+        max-height: 70vh;
+        overflow: auto;
+      }
+    }
+    /* Responsive Tableau embed fix */
+    .responsive-embed.tableau-embed {
+      aspect-ratio: unset;
+      height: 700px;
+      min-height: 400px;
+      max-width: 100%;
+      width: 100%;
+    }
+    .tableauPlaceholder, .tableauViz {
+      height: 700px !important;
+      min-height: 400px !important;
+    }
+    @media (max-width: 900px) {
+      .responsive-embed.tableau-embed,
+      .tableauPlaceholder, .tableauViz {
+        height: 400px !important;
+        min-height: 300px !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .responsive-embed.tableau-embed,
+      .tableauPlaceholder, .tableauViz {
+        height: 250px !important;
+        min-height: 200px !important;
+      }
+    }
+    #css-gradient-bg,
+    #vanta-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -10;
+      pointer-events: none;
+    }
+    #css-gradient-bg {
+      background: linear-gradient(120deg, #6a0dad 0%, #4b0082 100%, #c9a0dc 200%);
+      background-size: 200% 200%;
+      animation: gradientMove 12s ease-in-out infinite alternate;
+      filter: blur(0.5px);
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    html {
+      font-size: 18px;
+    }
+    @media (max-width: 1200px) {
+      html { font-size: 16px; }
+      .glass-card { max-width: 98vw; padding: 2rem 0.5rem; }
+      .section-title { font-size: 2.2rem; }
+    }
+    @media (max-width: 900px) {
+      html { font-size: 15px; }
+      .glass-card { max-width: 100vw; padding: 1.2rem 0.2rem; }
+      .section-title { font-size: 1.5rem; }
+      .section { margin-top: 18px; margin-bottom: 18px; min-height: 80vh; }
+      .responsive-embed, .responsive-embed.tableau-embed, .tableauPlaceholder, .tableauViz {
+        width: 100vw !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+        border-radius: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      html { font-size: 13px; }
+      .glass-card { padding: 0.5rem 0.1rem; border-radius: 1rem; }
+      .section-title { font-size: 1.1rem; }
+      .section { margin-top: 10px; margin-bottom: 10px; min-height: 60vh; }
+      .responsive-embed, .responsive-embed.tableau-embed, .tableauPlaceholder, .tableauViz {
+        width: 100vw !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+        border-radius: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="css-gradient-bg"></div>
+  <div id="vanta-bg"></div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-chart-line me-2"></i>
+        Purple Analytics
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#welcome">Welcome</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#dashboard1">Dashboard 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#dashboard2">Dashboard 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#showcase">Showcase</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#citations">Citations</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section id="welcome" class="section d-flex align-items-center">
+    <div class="container section-content">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8" data-aos="fade-up">
+          <h1 class="display-3 fw-bold mb-4">Welcome to Purple Analytics</h1>
+          <p class="lead mb-5">Discover insights through our interactive dashboards and explore our comprehensive data visualization showcase.</p>
+          <a href="#dashboard1" class="btn btn-primary btn-lg px-5 py-3 rounded-pill">
+            Explore Dashboards <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    </section>
+
+  <!-- Dashboard 1 Section -->
+  <section class="section" id="dashboard1">
+    <div class="glass-card">
+      <div class="section-title"><i class="fas fa-chart-pie me-2"></i>Interactive Dashboard 1</div>
+      <div class="d-block d-md-none text-center text-danger mb-2">
+        For the best experience, view this dashboard on a larger screen.
+      </div>
+      <div class="responsive-embed tableau-embed">
+        <div class='tableauPlaceholder' id='viz1750011679950' style='width:100%;height:700px;'>
+          <noscript>
+            <a href='#'>
+              <img alt='Pie charts ' src='https://public.tableau.com/static/images/Da/Data_viz_Project/Piecharts/1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz' width='100%' height='700'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='Data_viz_Project/Piecharts' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/Da/Data_viz_Project/Piecharts/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+          </object>
+        </div>
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1750011679950');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.width = '100%';
+          vizElement.style.height = '700px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+      </div>
+      </div>
+    </section>
+
+  <!-- Dashboard 2 Section -->
+  <section class="section" id="dashboard2">
+    <div class="glass-card">
+      <div class="section-title"><i class="fas fa-chart-pie me-2"></i>Interactive Dashboard 2</div>
+      <div class="d-block d-md-none text-center text-danger mb-2">
+        For the best experience, view this dashboard on a larger screen.
+      </div>
+      <div class="responsive-embed tableau-embed">
+        <div class='tableauPlaceholder' id='viz1750011679950' style='width:100%;height:700px;'>
+          <noscript>
+            <a href='#'>
+              <img alt='Pie charts ' src='https://public.tableau.com/static/images/Da/Data_viz_Project/Piecharts/1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz' width='100%' height='700'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='Data_viz_Project/Piecharts' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/Da/Data_viz_Project/Piecharts/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+          </object>
+        </div>
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1750011679950');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.width = '100%';
+          vizElement.style.height = '700px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+      </div>
+      </div>
+    </section>
+
+  <!-- Showcase Section -->
+  <section class="section" id="showcase">
+    <div class="glass-card">
+      <div class="section-title"><i class="fab fa-youtube me-2"></i>Site Showcase</div>
+      <div class="responsive-embed">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+      </div>
+      </div>
+    </section>
+
+  <!-- Citations Section -->
+  <section id="citations" class="section d-flex align-items-center">
+    <div class="container section-content">
+      <div class="row justify-content-center">
+        <div class="col-lg-10" data-aos="fade-up">
+          <h2 class="text-center mb-5">Citations</h2>
+          
+          <div class="citation-card" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="h5 mb-3"><i class="fas fa-book me-2"></i>Tableau Embedding</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">Tableau Help: Embedding Views. (n.d.). Retrieved from https://help.tableau.com/current/pro/desktop/en-us/embed_list.htm</li>
+              <li>The Data School. (2024, January 1). How to Embed a Tableau Dashboard in a website with Tableau Embedding API.</li>
+      </ul>
+          </div>
+
+          <div class="citation-card" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="h5 mb-3"><i class="fab fa-youtube me-2"></i>YouTube Embedding</h3>
+            <ul class="list-unstyled">
+              <li>Yoast. (2022, October 27). How to make YouTube videos responsive.</li>
+      </ul>
+          </div>
+
+          <div class="citation-card" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="h5 mb-3"><i class="fas fa-palette me-2"></i>Purple Palette Inspiration</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">Muffin Group. (2024, November 13). Websites with a Purple Color Palette to Inspire You.</li>
+              <li>MyCodelessWebsite. (2025, January 10). Best Purple Web Design of 2025.</li>
+      </ul>
+          </div>
+
+          <div class="citation-card" data-aos="fade-up" data-aos-delay="400">
+            <h3 class="h5 mb-3"><i class="fas fa-mobile-alt me-2"></i>Responsive Design</h3>
+            <ul class="list-unstyled">
+              <li>BrowserStack. (2022, December 22). What is Multi-Page Responsive Website.</li>
+      </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8">
+          <h3 class="mb-4">Purple Analytics Portal</h3>
+          <p class="mb-4">Transforming data into meaningful insights</p>
+          <div class="social-links mb-4">
+            <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
+          </div>
+          <p class="mb-0">&copy; 2025 Purple Analytics Portal. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+    </footer>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-indicator" id="scrollToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Scroll to top button
+    const scrollToTop = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 100) {
+        scrollToTop.style.display = 'flex';
+      } else {
+        scrollToTop.style.display = 'none';
+      }
+    });
+
+    scrollToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Navbar background change on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.pageYOffset > 50) {
+        navbar.style.background = 'rgba(106, 13, 173, 0.95)';
+      } else {
+        navbar.style.background = 'rgba(106, 13, 173, 0.8)';
+      }
+    });
+
+    // Vanta.js NET background
+    VANTA.NET({
+      el: "#vanta-bg",
+      color: 0x6a0dad,
+      backgroundColor: 0x1a002a,
+      points: 12.0,
+      maxDistance: 22.0,
+      spacing: 18.0,
+      showDots: true,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      scale: 1.0,
+      scaleMobile: 1.0
+    });
+  </script>
+</body>
+</html>
