@@ -387,7 +387,7 @@
     <div class="container">
       <a class="navbar-brand" href="#">
         <i class="fas fa-chart-line me-2"></i>
-        Purple Analytics
+        Country Clusters
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -422,15 +422,28 @@
     <div class="container section-content">
       <div class="row justify-content-center text-center">
         <div class="col-lg-8" data-aos="fade-up">
-          <h1 class="display-3 fw-bold mb-4">Welcome to Purple Analytics</h1>
+          <h1 class="display-3 fw-bold mb-4">Welcome to Visualizing Quantitative Country Clusters</h1>
           <p class="lead mb-5">Discover insights through our interactive dashboards and explore our comprehensive data visualization showcase.</p>
-          <a href="#dashboard1" class="btn btn-primary btn-lg px-5 py-3 rounded-pill">
+          <a href="#dashboard1" class="lead btn btn-primary btn-lg px-5 py-3 rounded-pill">
             Explore Dashboards <i class="fas fa-arrow-right ms-2"></i>
           </a>
+          <div style = 'margin-top: 1.5rem;'>
+            <p class = 'lead mb-5'>
+                The goal of our project is to use unsupervised classification methods to create a ranking of countries. This ranking can in turn be used to identify potential visiting locations, living locations or just for a comprehension of regional qualities for any other result parsing purposes. Here we take a look at 167 countries segregated into 4 categories, decreasing in quality of our 6 metrics with the last categories being of countries that we had no data on. Our 6 metrics are joint health related and economy related measures.
+            </p>
+          </div>
         </div>
       </div>
     </div>
     </section>
+
+    <div class = 'container'>
+      <div style = 'margin-top: 1.5rem;'>
+        <p class = 'lead mb-5'>
+          Metrics used are Health: the average cost of healthcare in the country, Exports: How many exports the country has on average annually, Imports: How many imports the country has on average annually, GDPP: The gross domestic product per person, Inflation: A measure of how inflated the economy of the country is, Life Expectancy: The average life expectancy of the population in the country.
+        </p>
+      </div>
+    </div>
 
   <!-- Dashboard 1 Section -->
   <section class="section" id="dashboard1">
@@ -474,6 +487,14 @@
       </div>
       </div>
     </section>
+
+    <div class = 'container'>
+      <div style = 'margin-top: 1.5rem;'>
+        <p class = 'lead mb-5'>
+          On our first dashboard, we introduce our features as they are described by the clusters themselves. You can either choose a country, a feature or a cluster to view. The idea behind the pie charts is to showcase how much any one cluster takes of the feature space as a whole. We can pick any one of the countries for which we had data, but below it will be easier to pick the country you want. We can see in the bar charts that the distributions seem pretty uniform except for some outliers. A few key takeaways include that cluster 0 is made up of a very small number of countries, just 3 in fact, but takes up a very large portion of the imports and exports globally for such a small group. At the same time it takes a very small section of the inflation and healthcare cost.
+        </p>
+      </div>
+    </div>
 
   <!-- Dashboard 2 Section -->
   <section class="section" id="dashboard2">
@@ -534,7 +555,14 @@
       </div>
     </section>
 
-    
+    <div class = 'container'>
+      <div style = 'margin-top: 1.5rem;'>
+        <p class = 'lead mb-5'>
+          Here we focus more on being able to see the characteristics of each country itself, rather than the cluster it belongs to. Each of the visualizations in this dashboard has each country in a easy to pick format, features and clusters take second place priority being visualized in the colors and sized on the treemap. Key takeaways here are the color distribution of the inflation map worldwide, which would suggest that there is a continental difference in inflation metrics between continents. At the same time we see the 3 countries of the 0 labeled cluster pulling away in the tree map.
+        </p>
+      </div>
+    </div>
+
   <!-- Dashboard 3 Section -->
   <section class="section" id="dashboard3">
     <div class="glass-card">
@@ -593,6 +621,14 @@
       </div>
     </section>
 
+    <div class = 'container'>
+      <div style = 'margin-top: 1.5rem;'>
+        <p class = 'lead mb-5'>
+          Finally we focus on the features themselves, providing one of the most high dimensional available in the analysis! The map is there for ease of choice and distinction based on cluster as well. Kay insights include the multi dimensional plot that has size color and 2d coordinates, that illustrates the difference between Malta, Singapore and Luxembourg. We have used the same inflation based coloring as before and here we see that the countries farther in the green (higher inflation) also have a different distribution on the positional coordinates as well. This suggests a covariance between the features.
+        </p>
+      </div>
+    </div>
+
   <!-- Showcase Section -->
   <section class="section" id="showcase">
     <div class="glass-card">
@@ -602,6 +638,22 @@
       </div>
       </div>
     </section>
+
+    <div class = 'container'>
+      <div style = 'margin-top: 1.5rem;'>
+        <p class = 'lead mb-5'>
+          Checkout our brief showcase of all the results in the video above!
+        </p>
+      </div>
+    </div>
+
+    <div class = 'container'>
+      <div style = 'margin-top: 1.5rem;'>
+        <p class = 'lead mb-5'>
+          Lastly, let's talk about the clustering mechanisms themselves. Clustering is a method with which categories can be found within a dataset and the algorithms used in total were hard k-measn, k-medoids, k-medians and the possibilistics c-means. From these the k-medoids was the clustering picked and it yields three categories (4 when you consider countries we didn't have data on). The k-medoids is a slow iterative algorithm that uses discreet and continuous data with a consistent unchanging unique solution. In our clustering analysis it was the most consistent and sensible and that is why it was picked.
+        </p>
+      </div>
+    </div>
 
   <!-- Citations Section -->
   <section id="citations" class="section d-flex align-items-center">
@@ -639,6 +691,22 @@
               <li>BrowserStack. (2022, December 22). What is Multi-Page Responsive Website.</li>
       </ul>
           </div>
+
+          <div class="citation-card" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="h5 mb-3"><i class="fas fa-palette me-2"></i>Data Availability</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">Kaggle - The data we used "unsupervised-learning-on-country-data".</li>
+                <li><a href = 'https://www.kaggle.com/datasets/rohan0301/unsupervised-learning-on-country-data'>https://www.kaggle.com/</a></li>
+      </ul>
+          </div>
+
+          <div class="citation-card" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="h5 mb-3"><i class="fas fa-palette me-2"></i>Clustering Execution</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">Matlab - Used for execution of the clustering algorithms.</li>
+                <li><a href = 'https://fr.mathworks.com/products/matlab.html'>https://fr.mathworks.com/</a></li>
+      </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -649,7 +717,7 @@
     <div class="container footer-content">
       <div class="row justify-content-center text-center">
         <div class="col-lg-8">
-          <h3 class="mb-4">Purple Analytics Portal</h3>
+          <h3 class="mb-4">Data Visualization</h3>
           <p class="mb-4">Transforming data into meaningful insights</p>
           <div class="social-links mb-4">
             <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
